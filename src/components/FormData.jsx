@@ -34,16 +34,16 @@ const FormData = ({ formData, formId }) => {
   return (
     <div>
       <Form {...form}>
-        <form className='flex flex-col items-center justify-center h-[90vh] gap-10' onSubmit={form.handleSubmit(onSubmit)} >
+        <form className='flex flex-col items-start justify-center h-[90vh] gap-10 pl-20 md:pl-60' onSubmit={form.handleSubmit(onSubmit)} >
           {
             formData.formData.map((ele, index) => {
               switch (step) {
                 case index: {
-                  return <div className='flex flex-col items-start gap-5 md:gap-10 w-full' key={index}>
-                    <div className='pl-16 md:pl-56'>
+                  return <div className='flex flex-col gap-5' key={index}>
+                    <div className='flex'>
                       <FormCard formElement={ele} />
                     </div>
-                    <div className='flex flex-row justify-around items-center w-full'>
+                    <div className='flex flex-row gap-14 items-center'>
                       <StepDecreaseButton setStep={setStep} step={step} />
                       <StepIncreaseButton setStep={setStep} step={step} max={formData.formData.length} />
                     </div>
