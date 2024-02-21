@@ -21,9 +21,6 @@ const FormName = () => {
       toast({ title: "Not supported", variant: "destructive" })
     })
   }
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   return (
     <>
       <form action={async (formData) => {
