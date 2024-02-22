@@ -11,14 +11,14 @@ import { Label } from "@/components/ui/label"
 import useFormData from '@/hooks/useFormData'
 import { formReducerActions } from '@/reducers/formDataReducer'
 import { DialogClose } from '@radix-ui/react-dialog'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import RadioOptionDialog from "../components/RadioOptionDialog"
 import { useToast } from "./ui/use-toast"
 
 const CustomDialog = ({ dialogLabel, callToAction, fieldName }) => {
   const [label, setLabel] = useState("")
   const [optionLabel, setOptionLabel] = useState("")
-  const { state, dispatch } = useFormData()
+  const { dispatch } = useFormData()
   const { toast } = useToast()
   const handleClick = () => {
     if (fieldName === "radio") {
@@ -38,9 +38,7 @@ const CustomDialog = ({ dialogLabel, callToAction, fieldName }) => {
       })
     }
   }
-  useEffect(() => {
-    console.log(state)
-  }, [state])
+
   return (
     <Dialog>
       <DialogTrigger asChild>

@@ -12,7 +12,9 @@ const dash = async ({ params }) => {
   return (
     <div>
       <Navbar />
-      <DisplayForms allForms={allForms} />
+      {
+        allForms && <DisplayForms allForms={allForms} />
+      }
     </div>
   )
 }
