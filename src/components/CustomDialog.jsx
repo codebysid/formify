@@ -31,6 +31,10 @@ const CustomDialog = ({ dialogLabel, callToAction, fieldName }) => {
       })
     }
     else {
+      if (!label) {
+        toast({ title: "Label cant be empty 🤦" })
+        return
+      }
       dispatch({
         type: formReducerActions.ADD_DATA, payload: {
           fieldName, label
