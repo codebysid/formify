@@ -3,6 +3,7 @@ import "./globals.css";
 import GithubProvider from "@/providers/GithubProvider";
 import FormDataProvider from "@/providers/FormDataProvider";
 import { Toaster } from "@/components/ui/toaster"
+import Footer from "../components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
           <FormDataProvider>
             <Toaster />
             {children}
+            <Footer />
           </FormDataProvider>
         </GithubProvider>
       </body>
