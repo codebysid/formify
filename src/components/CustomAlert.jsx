@@ -1,4 +1,5 @@
 "use client"
+import dynamic from "next/dynamic"
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -12,21 +13,28 @@ import React, { useState } from 'react'
 import { Button } from "../components/ui/button"
 import { getResponses } from "@/actions/form"
 import useUser from "@/hooks/useUser"
-import ResponseData from "./ResponseData"
+import { Skeleton } from "./ui/skeleton"
+const ResponseData = dynamic(() => import("./ResponseData"), {
+  loading: () => <Skeleton className="w-full h-full" />
+})
 import { useToast } from "./ui/use-toast"
 
 const CustomAlert = ({ formId }) => {
   const user = useUser()
   const [responseData, setResponseData] = useState([])
   const { toast } = useToast()
+  const [loading, setLoading] = useState(false)
+
   const handleGetResponses = async () => {
     if (!formId || !user?._id) {
       toast({ title: "something went wrong", variant: "destructive" })
       return
     }
     try {
+      setLoading(true)
       const responses = await getResponses(formId, user._id)
-      responses && setResponseData(responses)
+      setResponseData(responses)
+      setLoading(false)
     } catch (err) {
       console.log(err)
       toast({ title: "something went wrong", variant: "destructive" })
@@ -38,13 +46,19 @@ const CustomAlert = ({ formId }) => {
       <AlertDialogTrigger asChild>
         <Button size="sm" onClick={handleGetResponses}>View Responses</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="overflow-auto h-[50%]">
+      <AlertDialogContent className="overflow-auto h-[50%] flex flex-col justify-between items-center">
         <AlertDialogHeader >
           <AlertDialogTitle>Responses</AlertDialogTitle>
           {
-            responseData && responseData.map((ele, key) => {
+            loading && responseData.length === 0 && <Skeleton className="w-full h-full">
+              Hold on...
+            </Skeleton>
+          }
+
+          {
+            responseData.length > 0 ? responseData.map((ele, key) => {
               return <ResponseData key={key} data={ele.responseData} />
-            })
+            }) : loading === false && <p>No Response Yet</p>
           }
         </AlertDialogHeader>
         <AlertDialogFooter>

@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
-
 
 @layer base {
   :root {
@@ -59,6 +57,14 @@
     @apply bg-background text-foreground;
   }
 }
+html{
+  height:100%;
+}
+body{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
 
 .labelForForm{
   @apply text-xl md:text-3xl
@@ -73,4 +79,68 @@
   content: '🥑'; /* Add the avocado emoji as a content before each list item */
   display: inline-block;
   margin-right: 8px; /* Adjust spacing between the emoji and the text */
+}
+
+.footerIcon{
+  @apply bg-white text-black p-1 rounded h-[20px] w-[20px]
+}
+
+.slide-container{
+  --gap:20px;
+  --secondary: #1f2937;
+  background:var(--secondary);
+overflow:hidden;
+display:flex;
+gap:var(--gap);
+padding:4rem 0;
+position:relative;
+box-shadow: 2px 2px 100px 8px var(--secondary);
+border-radius:3vw;
+}
+
+.slide{
+  display:flex;
+  flex-direction:row;
+  gap:var(--gap);
+  flex-shrink:0;
+  user-select:none;
+  animation:carousel 20s infinite linear;
+}
+
+@keyframes carousel{
+  to{
+    transform:translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.slide-container:before{
+  position:absolute;
+  content:"";
+  background:linear-gradient(to left, rgba(255,255,255,0),var(--secondary));
+  top:0;
+  left:0;
+  width:40px;
+  height:100%;
+  z-index:2;
+}
+
+.slide-container:after{
+  position:absolute;
+  content:"";
+  background:linear-gradient(to right, rgba(255,255,255,0),var(--secondary));
+  top:0;
+  right:0;
+  width:40px;
+  height:100%;
+  z-index:2;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .slide-container {
+    display:none;
+  }
+.slide *{
+  display:none;
+}
 }
