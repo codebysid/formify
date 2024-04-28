@@ -31,11 +31,11 @@ export async function getForm(formId) {
   }
 }
 
-export async function saveFormResponse(responseData, formId, owner) {
-  if (!formId || !owner) throw new Error("formId/owner required")
+export async function saveFormResponse(responseData, formId) {
+  if (!formId) throw new Error("formId/owner required")
   try {
     await connectToMongo()
-    await Response.create({ responseData, formId, owner })
+    await Response.create({ responseData, formId })
   } catch (err) {
     console.log(err)
   }

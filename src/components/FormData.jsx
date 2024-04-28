@@ -1,6 +1,5 @@
 "use client"
 import { saveFormResponse } from '@/actions/form'
-import useUser from '@/hooks/useUser'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '../components/ui/button'
@@ -12,18 +11,18 @@ import { useToast } from './ui/use-toast'
 import { useRouter } from 'next/navigation'
 
 const FormData = ({ formData, formId }) => {
-  const user = useUser()
   const [step, setStep] = useState(0)
   const form = useForm()
   const router = useRouter()
   const { toast } = useToast()
+
   const onSubmit = async (data) => {
     if (!data || !formId) {
       toast({ title: "nothing to add 🤦" })
       return
     }
     try {
-      await saveFormResponse(data, formId, user._id)
+      await saveFormResponse(data, formId)
       router.push("/formSubmitted")
     } catch (err) {
       console.log(err)
