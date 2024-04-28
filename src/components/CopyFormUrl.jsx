@@ -16,9 +16,9 @@ const CopyFormUrl = ({ createdFormId, onlyFormUrl }) => {
   }
 
   return (
-    <div className={`flex flex-col gap-3 justify-center items-center w-11/12 ${!onlyFormUrl && "absolute"} ${onlyFormUrl && "w-1/3 lg:w-1/4 "}`} >
+    <div className={`flex flex-col gap-3 justify-center items-center w-11/12 ${!onlyFormUrl && "absolute"} ${onlyFormUrl && "w-1/3 lg:w-1/4 md:1/4"}`} >
       <div className=' w-full flex flex-row gap-2 items-center'>
-        <span className={`w-full break-words bg-gray-800 rounded-xl p-2 text-xs ${onlyFormUrl && "lg:w-fit"}`}>{formUrl}</span>
+        <span className={`w-full break-words bg-gray-800 rounded-xl p-2 text-xs ${onlyFormUrl && "lg:w-fit md:w-fit"}`}>{formUrl}</span>
         {
           !onlyFormUrl && <Button variant="outline" onClick={handleCopyUrl} className="flex flex-row gap-2"><Copy size={12} /></Button>
         }
