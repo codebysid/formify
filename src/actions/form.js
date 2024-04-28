@@ -58,7 +58,7 @@ export async function getResponses(formId, owner) {
   try {
     await connectToMongo()
     const responses = await Response.find({ formId, owner })
-    if (!responses) return
+    if (!responses.length > 0) return
     return JSON.parse(JSON.stringify(responses))
   } catch (err) {
     console.log(err)
