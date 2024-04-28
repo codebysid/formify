@@ -57,8 +57,8 @@ export async function getResponses(formId, owner) {
   if (!formId || !owner) throw new Error("formId/owner reuired")
   try {
     await connectToMongo()
-    const responses = await Response.find({ formId, owner })
-    if (!responses.length > 0) return
+    const responses = await Response.find({ formId })
+    if (responses) return
     return JSON.parse(JSON.stringify(responses))
   } catch (err) {
     console.log(err)
