@@ -1,5 +1,4 @@
 "use client"
-import dynamic from "next/dynamic"
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -14,9 +13,7 @@ import { Button } from "../components/ui/button"
 import { getResponses } from "@/actions/form"
 import useUser from "@/hooks/useUser"
 import { Skeleton } from "./ui/skeleton"
-const ResponseData = dynamic(() => import("./ResponseData"), {
-  loading: () => <Skeleton className="w-full h-full" />
-})
+import ResponseData from "./ResponseData"
 import { useToast } from "./ui/use-toast"
 
 const CustomAlert = ({ formId }) => {
@@ -54,12 +51,13 @@ const CustomAlert = ({ formId }) => {
               Hold on...
             </Skeleton>
           }
-
-          {
-            responseData.length > 0 ? responseData.map((ele, key) => {
-              return <ResponseData key={key} data={ele.responseData} />
-            }) : loading === false && <p>No Response Yet</p>
-          }
+          <div className="flex flex-col gap-5">
+            {
+              responseData.length > 0 ? responseData.map((ele, key) => {
+                return <ResponseData key={key} data={ele.responseData} />
+              }) : loading === false && <p>No Response Yet</p>
+            }
+          </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Close</AlertDialogCancel>

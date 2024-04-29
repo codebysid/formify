@@ -19,7 +19,7 @@ const socials = [
 const FooterSection = () => {
 
   return (
-    <div className='flex flex-col gap-3 justify-center items-center mt-auto text-xs md:text-sm lg:text-sm'>
+    <div className='flex flex-col gap-3 justify-center items-center mt-auto text-xs md:text-sm lg:text-sm pt-10 pb-5'>
       <p>Made with 💜 by Siddhant Jain</p>
       <div className='flex flex-row gap-10'>
         &#123;
